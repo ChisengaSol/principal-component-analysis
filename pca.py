@@ -24,11 +24,6 @@ class PCA:
         return cov
 
     def fit(self, X):
-        # standardize data
-        mean = self.mean(X)
-        std = self.std(X)
-        X_std = self.Standardize_data(X)
-
         # eigenv decomposition of cov matrix
         cov = self.covariance(X)
         eigen_values, eigen_vectors = eig(cov)
@@ -44,6 +39,7 @@ class PCA:
         ]
         explained_variance = np.round(explained_variance, 2)
         cum_explained_variance = np.cumsum(explained_variance)
+        return cum_explained_variance
 
     def transform(self, X):
         P = self.eigen_vectors_sorted[: self.n_component, :]  # Projection matrix
